@@ -1,0 +1,18 @@
+.table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    
+  }
+  
+  .table-container {
+    border-radius: px;
+    overflow: hidden;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .column {
+    width: 10px;
+
+  }
