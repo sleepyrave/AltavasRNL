@@ -3,8 +3,6 @@ import Genders from "./pages/gender/Genders";
 import EditGender from "./pages/gender/EditGender";
 import DeleteGender from "./pages/gender/DeleteGender";
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,7 +13,7 @@ const router = createBrowserRouter([
     element: <EditGender />,
   },
   {
-    path: "/gender/delete",
+    path: "/gender/delete/:gender_id",
     element: <DeleteGender />,
   },
 ]);
