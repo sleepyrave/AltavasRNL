@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../../handler/ErrorHandler";
-import Spinner from "../Spinner";
-import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
-import SpinnerSmall from "../SpinnerSmall";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../../handler/ErrorHandler";
+import Spinner from "../../Spinner";
+import GenderFieldErrors from "../../../interfaces/GenderFieldErrors";
+import SpinnerSmall from "../../SpinnerSmall";
 
 interface EditGenderFormProps {
   onGenderUpdate: (message: string) => void;
@@ -72,7 +72,6 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
     GenderService.updateGender(state.gender_id, state)
       .then((res) => {
         if (res.status === 200) {
-          onGenderUpdate(res.data.message);
           setState((prevState) => ({
             ...prevState,
             errors: {} as GenderFieldErrors,
@@ -109,7 +108,7 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
       const parsedGenderId = parseInt(gender_id);
       handleGetGender(parsedGenderId);
     } else {
-      console.error("Invalid gender_id", gender_id);
+      console.error("Invalid gender_id: ", gender_id);
     }
   }, [gender_id]);
 
