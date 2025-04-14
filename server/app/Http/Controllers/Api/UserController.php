@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-     public function loadUsers()
+    public function loadUsers()
     {
         $users = User::with(['gender'])
             ->where('tbl_users.is_deleted', false)
@@ -88,6 +88,17 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User Successfully Updated.'
+        ], 200);
+    }
+
+    public function destroyUser(User $user)
+    {
+        $user->update([
+            'is_deleted' => true
+        ]);
+
+        return response()->json([
+            'message' => 'User Successfully Deleted.'
         ], 200);
     }
 }

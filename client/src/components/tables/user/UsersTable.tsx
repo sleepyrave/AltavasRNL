@@ -7,9 +7,14 @@ import Spinner from "../../Spinner";
 interface UsersTableProps {
   refreshUsers: boolean;
   onEditUser: (user: Users) => void;
+  onDeleteUser: (user: Users) => void;
 }
 
-const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
+const UsersTable = ({
+  refreshUsers,
+  onEditUser,
+  onDeleteUser,
+}: UsersTableProps) => {
   const [state, setState] = useState({
     loadingUsers: true,
     users: [] as Users[],
@@ -25,7 +30,7 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
           }));
         } else {
           console.error(
-            "Unexpected status error while loading users",
+            "Unexpected status error while loading users: ",
             res.status
           );
         }
@@ -41,8 +46,9 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
       });
   };
 
-  const handleUsersFullname = (user: Users) => {
+  const handleUsersFullName = (user: Users) => {
     let fullName = "";
+
     if (user.middle_name) {
       fullName = `${user.last_name}, ${
         user.first_name
@@ -88,7 +94,7 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
             state.users.map((user, index) => (
               <tr className="align-middle" key={index}>
                 <td>{index + 1}</td>
-                <td>{handleUsersFullname(user)}</td>
+                <td>{handleUsersFullName(user)}</td>
                 <td>{user.gender.gender}</td>
                 <td>{user.birth_date}</td>
                 <td>{user.address}</td>
@@ -103,7 +109,11 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
                     >
                       Edit
                     </button>
-                    <button type="button" className="btn btn-danger">
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => onDeleteUser(user)}
+                    >
                       Delete
                     </button>
                   </div>
